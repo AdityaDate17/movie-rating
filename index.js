@@ -11,8 +11,7 @@ app.listen(3000, () =>{
 
 
 app.get("/longestdurationmovies", (req, res) => {
-    // res.json({ message: "Welcome to bezkoder application." });
-    // res.send("done");
+
     con.query("SELECT  tconst, primaryTitle, runtimeMinutes ,genres FROM movie WHERE runtimeMinutes IN (SELECT (runtimeMinutes) FROM movie) ORDER BY runtimeMinutes DESC LIMIT 10;",(err,result)=>{
         if(err)
         {
@@ -21,7 +20,7 @@ app.get("/longestdurationmovies", (req, res) => {
 
         else{
             res.send(result)
-            // console.log(result)
+            
         }
     })
   });
@@ -42,8 +41,6 @@ app.get("/longestdurationmovies", (req, res) => {
 
 
   app.get("/topratedmovies", (req, res) => {
-    // res.json({ message: "Welcome to bezkoder application." });
-    // res.send("done");
     con.query("SELECT  tconst, primaryTitle, genres ,averageRating, AVG(averageRating)>6.0 FROM movie LEFT JOIN rating USING (tconst) GROUP BY averageRating HAVING AVG(averageRating) >= 6.0 ORDER BY AVG(averageRating) ASC;",(err,result)=>{
         if(err)
         {
@@ -52,7 +49,6 @@ app.get("/longestdurationmovies", (req, res) => {
 
         else{
             res.send(result)
-            // console.log(result)
         }
     })
   });
