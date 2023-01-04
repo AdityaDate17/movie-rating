@@ -49,6 +49,7 @@ app.get("/longestdurationmovies", (req, res) => {
 
         else{
             res.send(result)
+            console.log(result)
         }
     })
   });
